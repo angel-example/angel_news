@@ -1,11 +1,17 @@
 import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_static/angel_static.dart';
 import 'package:file/file.dart';
+import 'package:hn/src/services.dart';
 import 'routes/auth.dart' as auth;
+import 'routes/post_list.dart' as post_list;
 
 AngelConfigurer configureServer(FileSystem fs) {
   return (Angel app) async {
-    await app.configure(auth.configureServer);
+    // Grab a reference to our services from the IoC container.
+    var services = app.container.make(Services) as Services;
+
+    await app.configure(auth.configureServer(services));
+    await app.configure(post_list.configureServer(services));
 
     app.get('/login', (RequestContext req, ResponseContext res) async {
       await res.render('login', {

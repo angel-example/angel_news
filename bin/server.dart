@@ -26,6 +26,7 @@ main() async {
   ]);
 
   var server = await hot.startServer('127.0.0.1', 3000);
+  server.defaultResponseHeaders.clear();
 
   print('Listening at http://${server.address.address}:${server.port}');
 }
