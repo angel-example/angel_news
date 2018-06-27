@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_paginate/angel_paginate.dart';
+import 'package:dart2_tryparse/dart2_tryparse.dart';
 import 'package:hn/src/models/models.dart';
 import 'package:hn/src/services.dart';
 
@@ -55,7 +56,7 @@ Function showPostList(
     {Iterable<Post> Function(List<Post>) filter}) {
   return (Services services, RequestContext req, ResponseContext res,
       {user}) async {
-    var paginator = await fetchPosts(query(req), req, services);
+    var paginator = await fetchPosts(query(req), req, services, filter: filter);
     await res.render('posts', {'title': title, 'paginator': paginator});
   };
 }
@@ -72,19 +73,18 @@ Future<Paginator<Post>> fetchPosts(
     index = services.postService.index({'query': query});
   }
 
-  Iterable<Post> posts = await index.then(
-          (it) => it.map(PostSerializer.fromMap));
+  Iterable<Post> posts =
+      await index.then((it) => it.map(PostSerializer.fromMap));
 
   if (filter != null) {
     posts = filter(posts.toList());
   }
 
-
   var paginator = new Paginator<Post>(
     posts,
-    itemsPerPage: int.tryParse(req.query['items_per_page'].toString()) ?? 5,
+    itemsPerPage: tryParseInt(req.query['items_per_page'].toString()) ?? 30,
   );
 
-  paginator.goToPage(int.tryParse(req.query['page'].toString()) ?? 1);
+  paginator.goToPage(tryParseInt(req.query['page'].toString()) ?? 1);
   return paginator;
 }
