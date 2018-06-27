@@ -11,6 +11,7 @@ abstract class PostSerializer {
     return new Post(
         id: map['id'],
         userId: map['user_id'],
+        type: map['type'],
         title: map['title'],
         link: map['link'],
         text: map['text'],
@@ -31,6 +32,7 @@ abstract class PostSerializer {
     return {
       'id': model.id,
       'user_id': model.userId,
+      'type': model.type,
       'title': model.title,
       'link': model.link,
       'text': model.text,
@@ -45,6 +47,8 @@ abstract class PostFields {
   static const String id = 'id';
 
   static const String userId = 'user_id';
+
+  static const String type = 'type';
 
   static const String title = 'title';
 

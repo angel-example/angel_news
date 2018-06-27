@@ -5,9 +5,13 @@ part 'post.g.dart';
 
 part 'post.serializer.g.dart';
 
+enum PostType { normal, askAN, showAN }
+
 @serializable
 abstract class _Post extends Model {
   String get userId;
+
+  PostType get type;
 
   String get title;
 

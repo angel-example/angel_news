@@ -6,6 +6,8 @@ import 'package:file/file.dart';
 
 AngelConfigurer configureServer(FileSystem fs) {
   return (Angel app) async {
+    app.container.singleton(fs, as: FileSystem);
+
     // Loads app configuration from 'config/'.
     // It supports loading from YAML files, and also supports loading a `.env` file.
     //

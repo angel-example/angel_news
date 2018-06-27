@@ -10,6 +10,7 @@ class Post extends _Post {
   Post(
       {this.id,
       this.userId,
+      this.type,
       this.title,
       this.link,
       this.text,
@@ -22,6 +23,9 @@ class Post extends _Post {
 
   @override
   final String userId;
+
+  @override
+  final PostType type;
 
   @override
   final String title;
@@ -44,6 +48,7 @@ class Post extends _Post {
   Post copyWith(
       {String id,
       String userId,
+      PostType type,
       String title,
       String link,
       String text,
@@ -53,6 +58,7 @@ class Post extends _Post {
     return new Post(
         id: id ?? this.id,
         userId: userId ?? this.userId,
+        type: type ?? this.type,
         title: title ?? this.title,
         link: link ?? this.link,
         text: text ?? this.text,
@@ -65,6 +71,7 @@ class Post extends _Post {
     return other is _Post &&
         other.id == id &&
         other.userId == userId &&
+        other.type == type &&
         other.title == title &&
         other.link == link &&
         other.text == text &&

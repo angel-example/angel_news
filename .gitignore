@@ -89,3 +89,4 @@ fabric.properties
 log.txt
 
 .dart_tool
+.db

@@ -8,16 +8,32 @@ html, body {
 
 nav {
     background-color: #209cee;
+    overflow: hidden;
 }
 
 nav ul {
+    float: left;
     list-style-type: none;
     margin: 0;
     padding: 0.5em 1em;
 }
 
+nav ul.right {
+    float: right;
+}
+
 nav ul li {
     display: inline;
+}
+
+nav ul li:not(:last-child) {
+    display: inline;
+}
+
+nav ul li:not(:last-child):after {
+    margin-left: 0.3em;
+    content: "|";
+    margin-right: 0.3em;
 }
 
 nav ul li a {
@@ -25,8 +41,12 @@ nav ul li a {
     text-decoration: none;
 }
 
+li.header {
+    margin-left: 0;
+}
+
 li.header a {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 main {

@@ -9,8 +9,8 @@ part of 'vote.dart';
 class Vote extends _Vote {
   Vote(
       {this.id,
-      this.isUpvote,
       this.userId,
+      this.type,
       this.postId,
       this.commentId,
       this.createdAt,
@@ -20,10 +20,10 @@ class Vote extends _Vote {
   final String id;
 
   @override
-  final bool isUpvote;
+  final String userId;
 
   @override
-  final String userId;
+  final VoteType type;
 
   @override
   final String postId;
@@ -39,16 +39,16 @@ class Vote extends _Vote {
 
   Vote copyWith(
       {String id,
-      bool isUpvote,
       String userId,
+      VoteType type,
       String postId,
       String commentId,
       DateTime createdAt,
       DateTime updatedAt}) {
     return new Vote(
         id: id ?? this.id,
-        isUpvote: isUpvote ?? this.isUpvote,
         userId: userId ?? this.userId,
+        type: type ?? this.type,
         postId: postId ?? this.postId,
         commentId: commentId ?? this.commentId,
         createdAt: createdAt ?? this.createdAt,
@@ -58,8 +58,8 @@ class Vote extends _Vote {
   bool operator ==(other) {
     return other is _Vote &&
         other.id == id &&
-        other.isUpvote == isUpvote &&
         other.userId == userId &&
+        other.type == type &&
         other.postId == postId &&
         other.commentId == commentId &&
         other.createdAt == createdAt &&
