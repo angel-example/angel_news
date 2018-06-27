@@ -9,21 +9,23 @@ part of 'post.dart';
 abstract class PostSerializer {
   static Post fromMap(Map map) {
     return new Post(
-        id: map['id'],
-        userId: map['user_id'],
-        type: map['type'],
-        title: map['title'],
-        link: map['link'],
-        text: map['text'],
-        karma: map['karma'],
+        id: map['id'] as String,
+        userId: map['user_id'] as String,
+        type: map['type'] is PostType
+            ? map['type']
+            : (map['type'] is int ? PostType.values[map['type']] : null),
+        title: map['title'] as String,
+        link: map['link'] as String,
+        text: map['text'] as String,
+        karma: map['karma'] as int,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
-                ? map['created_at']
+                ? (map['created_at'] as DateTime)
                 : DateTime.parse(map['created_at']))
             : null,
         updatedAt: map['updated_at'] != null
             ? (map['updated_at'] is DateTime
-                ? map['updated_at']
+                ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at']))
             : null);
   }
@@ -32,7 +34,7 @@ abstract class PostSerializer {
     return {
       'id': model.id,
       'user_id': model.userId,
-      'type': model.type,
+      'type': model.type == null ? null : PostType.values.indexOf(model.type),
       'title': model.title,
       'link': model.link,
       'text': model.text,

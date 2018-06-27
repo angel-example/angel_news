@@ -30,10 +30,21 @@ AngelConfigurer configureServer(Services services) {
           .then((map) => UserSerializer.fromMap(map));
     };
 
+    // Inject the current user + path into `res.render`, since the user is parsed here.
+    app.use((RequestContext req, ResponseContext res) {
+      res.renderParams
+          .addAll({'user': req.properties['user'], 'path': req.uri.path});
+      return true;
+    });
+
     await app.configure(auth.configureServer);
 
-    auth.strategies
-        .add(new LocalAuthStrategy(localAuthVerifier(services, pepper)));
+    auth.strategies.add(
+      new LocalAuthStrategy(
+        localAuthVerifier(services, pepper),
+        allowBasic: false,
+      ),
+    );
 
     app.group('/auth', authRoutes(auth, pepper));
   };

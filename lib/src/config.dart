@@ -42,6 +42,7 @@ AngelConfigurer configureServer(FileSystem fs) {
         res
           ..cookies.add(new Cookie('token', '')
             ..path = '/'
+            ..maxAge = -1
             ..expires = new DateTime.now().subtract(const Duration(days: 365)))
           ..redirect('/');
       } else {

@@ -9,19 +9,21 @@ part of 'vote.dart';
 abstract class VoteSerializer {
   static Vote fromMap(Map map) {
     return new Vote(
-        id: map['id'],
-        userId: map['user_id'],
-        type: map['type'],
-        postId: map['post_id'],
-        commentId: map['comment_id'],
+        id: map['id'] as String,
+        userId: map['user_id'] as String,
+        type: map['type'] is VoteType
+            ? map['type']
+            : (map['type'] is int ? VoteType.values[map['type']] : null),
+        postId: map['post_id'] as String,
+        commentId: map['comment_id'] as String,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
-                ? map['created_at']
+                ? (map['created_at'] as DateTime)
                 : DateTime.parse(map['created_at']))
             : null,
         updatedAt: map['updated_at'] != null
             ? (map['updated_at'] is DateTime
-                ? map['updated_at']
+                ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at']))
             : null);
   }
@@ -30,7 +32,7 @@ abstract class VoteSerializer {
     return {
       'id': model.id,
       'user_id': model.userId,
-      'type': model.type,
+      'type': model.type == null ? null : VoteType.values.indexOf(model.type),
       'post_id': model.postId,
       'comment_id': model.commentId,
       'created_at': model.createdAt?.toIso8601String(),

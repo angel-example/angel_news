@@ -1,13 +1,13 @@
 html, body {
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 10pt;
+    font-size: 11pt;
     height: 100%;
     margin: 0;
     padding: 0.5em 3em;
 }
 
 nav {
-    background-color: #209cee;
+    background-color: #d81c1c;
     overflow: hidden;
 }
 
@@ -49,8 +49,39 @@ li.header a {
     font-weight: bold;
 }
 
+li.header img {
+    height: 18px;
+    top: 1px;
+    position: relative;
+    width: auto;
+}
+
 main {
     background-color: #f1f1f1;
     height: 100%;
     padding: 1em;
+}
+
+.post-info {
+    margin-bottom: 1em;
+}
+
+.post-info a {
+    color: initial;
+    text-decoration: none;
+}
+.post-info a:visited {
+    color: #828282;
+}
+
+.post-info .sub {
+    color: #828282;
+    font-size: 0.8em;
+}
+
+.post-info .sub a {
+    color: #828282;
+}
+.post-info .sub a:hover {
+    text-decoration: underline;
 }

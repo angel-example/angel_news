@@ -9,19 +9,19 @@ part of 'user.dart';
 abstract class UserSerializer {
   static User fromMap(Map map) {
     return new User(
-        id: map['id'],
-        username: map['username'],
-        password: map['password'],
-        salt: map['salt'],
-        karma: map['karma'],
+        id: map['id'] as String,
+        username: map['username'] as String,
+        password: map['password'] as String,
+        salt: map['salt'] as String,
+        karma: map['karma'] as int,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
-                ? map['created_at']
+                ? (map['created_at'] as DateTime)
                 : DateTime.parse(map['created_at']))
             : null,
         updatedAt: map['updated_at'] != null
             ? (map['updated_at'] is DateTime
-                ? map['updated_at']
+                ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at']))
             : null);
   }

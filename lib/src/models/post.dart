@@ -1,5 +1,6 @@
 import 'package:angel_model/angel_model.dart';
 import 'package:angel_serialize/angel_serialize.dart';
+import 'package:timeago/timeago.dart';
 
 part 'post.g.dart';
 
@@ -20,4 +21,12 @@ abstract class _Post extends Model {
   String get text;
 
   int get karma;
+
+  String get linkTo => isLink ? link : '/post/$id';
+
+  bool get isLink => link?.isNotEmpty == true;
+
+  String get hostname =>  Uri.parse(link).host;
+
+  String get fuzzyTime => timeAgo(createdAt.toLocal());
 }

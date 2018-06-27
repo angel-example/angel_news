@@ -9,20 +9,20 @@ part of 'comment.dart';
 abstract class CommentSerializer {
   static Comment fromMap(Map map) {
     return new Comment(
-        id: map['id'],
-        userId: map['user_id'],
-        postId: map['post_id'],
-        parentId: map['parent_id'],
-        text: map['text'],
-        karma: map['karma'],
+        id: map['id'] as String,
+        userId: map['user_id'] as String,
+        postId: map['post_id'] as String,
+        parentId: map['parent_id'] as String,
+        text: map['text'] as String,
+        karma: map['karma'] as int,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
-                ? map['created_at']
+                ? (map['created_at'] as DateTime)
                 : DateTime.parse(map['created_at']))
             : null,
         updatedAt: map['updated_at'] != null
             ? (map['updated_at'] is DateTime
-                ? map['updated_at']
+                ? (map['updated_at'] as DateTime)
                 : DateTime.parse(map['updated_at']))
             : null);
   }

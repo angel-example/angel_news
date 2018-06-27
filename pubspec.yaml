@@ -12,6 +12,8 @@ dependencies:
   angel_paginate: ^1.0.0
   angel_static: ^1.3.0
   angel_validate: ^1.0.0
+  canonical_url: ^1.0.0
+  timeago: ^1.0.0
 dev_dependencies: 
   angel_hot: ^1.0.0
   angel_serialize_generator: ^2.0.0

@@ -4,6 +4,7 @@ import 'package:file/file.dart';
 import 'package:hn/src/services.dart';
 import 'routes/auth.dart' as auth;
 import 'routes/post_list.dart' as post_list;
+import 'routes/submit.dart' as submit;
 
 AngelConfigurer configureServer(FileSystem fs) {
   return (Angel app) async {
@@ -12,6 +13,7 @@ AngelConfigurer configureServer(FileSystem fs) {
 
     await app.configure(auth.configureServer(services));
     await app.configure(post_list.configureServer(services));
+    await app.configure(submit.configureServer(services));
 
     app.get('/login', (RequestContext req, ResponseContext res) async {
       await res.render('login', {

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_paginate/angel_paginate.dart';
 import 'package:hn/src/models/models.dart';
@@ -12,18 +11,43 @@ AngelConfigurer configureServer(Services services) {
         showPostList(
           'Top',
           (req) => {},
-          filter: (users) => users..sort((a, b) => b.karma.compareTo(a.karma)),
+          filter: filterTopPosts,
         ));
 
     app.get(
         '/new',
         showPostList(
-          'New',
+          'New Links',
           (req) => {},
           filter: (users) =>
               users..sort((a, b) => b.createdAt.compareTo(a.createdAt)),
         ));
+
+    app.get(
+        '/show',
+        showPostList(
+          'Show',
+          (req) => queryByType(PostType.showAN),
+          filter: filterTopPosts,
+        ));
+
+    app.get(
+        '/ask',
+        showPostList(
+          'Ask',
+          (req) => queryByType(PostType.askAN),
+          filter: filterTopPosts,
+        ));
   };
+}
+
+Map<String, dynamic> queryByType(PostType type) =>
+    {PostFields.type: PostType.values.indexOf(type)};
+
+Iterable<Post> filterTopPosts(List<Post> posts) => posts..sort(sortTopPosts);
+
+int sortTopPosts(Post a, Post b) {
+  return b.karma.compareTo(a.karma);
 }
 
 Function showPostList(
@@ -32,12 +56,7 @@ Function showPostList(
   return (Services services, RequestContext req, ResponseContext res,
       {user}) async {
     var paginator = await fetchPosts(query(req), req, services);
-    await res.render('posts', {
-      'title': title,
-      'user': user,
-      'paginator': paginator,
-      'path': req.uri.path,
-    });
+    await res.render('posts', {'title': title, 'paginator': paginator});
   };
 }
 
@@ -45,12 +64,21 @@ Function showPostList(
 Future<Paginator<Post>> fetchPosts(
     Map<String, dynamic> query, RequestContext req, Services services,
     {Iterable<Post> Function(List<Post>) filter}) async {
-  Iterable<Post> posts = await services.postService
-      .index({'query': query}).then((it) => it.map(PostSerializer.fromMap));
+  Future index;
+
+  if (query.isEmpty) {
+    index = services.postService.index();
+  } else {
+    index = services.postService.index({'query': query});
+  }
+
+  Iterable<Post> posts = await index.then(
+          (it) => it.map(PostSerializer.fromMap));
 
   if (filter != null) {
     posts = filter(posts.toList());
   }
+
 
   var paginator = new Paginator<Post>(
     posts,
