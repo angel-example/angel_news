@@ -1,0 +1,36 @@
+html, body {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+    height: 100%;
+    margin: 0;
+    padding: 0.5em 3em;
+}
+
+nav {
+    background-color: #209cee;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0.5em 1em;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: initial;
+    text-decoration: none;
+}
+
+li.header a {
+  font-weight: bold;
+}
+
+main {
+    background-color: #f1f1f1;
+    height: 100%;
+    padding: 1em;
+}
