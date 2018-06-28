@@ -23,7 +23,10 @@ AngelConfigurer configureServer(FileSystem fs) {
     // conditionals, and more.
     //
     // https://github.com/angel-dart/jael
-    await app.configure(jael(fs.directory('views')));
+    await app.configure(jael(
+      fs.directory('views'),
+      cacheViews: app.isProduction,
+    ));
 
     // Enable GZIP and DEFLATE compression (conserves bandwidth)
     // https://github.com/angel-dart/compress

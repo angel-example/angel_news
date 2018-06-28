@@ -63,6 +63,11 @@ main {
     padding: 1em;
 }
 
+textarea {
+    font-family: monospace;
+    font-size: 10pt;
+}
+
 .post-info {
     margin-bottom: 1em;
 }
@@ -87,6 +92,11 @@ main {
 
 .post-info .sub a:hover {
     text-decoration: underline;
+}
+
+.post-text {
+    color: #828282;
+    margin-left: 1em;
 }
 
 .sub.push {

@@ -4,6 +4,7 @@ import 'package:angel_paginate/angel_paginate.dart';
 import 'package:dart2_tryparse/dart2_tryparse.dart';
 import 'package:hn/src/models/models.dart';
 import 'package:hn/src/services.dart';
+import 'package:pooled_map/pooled_map.dart';
 
 AngelConfigurer configureServer(Services services) {
   return (Angel app) async {
@@ -91,12 +92,14 @@ Future<Paginator<Post>> fetchPosts(
       await index.then((it) => it.map(PostSerializer.fromMap));
 
   // Fetch the user
-  var users = <String, User>{};
+  var users = new PooledMap<String, User>();
 
   posts = await Future.wait<Post>(posts.map((post) async {
-    var user = users[post.userId] ??= await services.userService
-        .read(post.userId)
-        .then((map) => UserSerializer.fromMap(map));
+    var user = await users.putIfAbsent(post.userId, () {
+      return services.userService
+          .read(post.userId)
+          .then((map) => UserSerializer.fromMap(map));
+    });
     return post.copyWith(user: user);
   }));
 

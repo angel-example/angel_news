@@ -30,7 +30,7 @@ abstract class _Post extends Model {
 
   bool get isLink => link?.isNotEmpty == true;
 
-  String get hostname =>  Uri.parse(link).host;
+  String get hostname => Uri.parse(link).host;
 
   String get fuzzyTime => timeAgo(createdAt.toLocal());
 }

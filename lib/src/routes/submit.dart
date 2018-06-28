@@ -6,7 +6,6 @@ import 'package:hn/src/models/models.dart';
 import 'package:hn/src/services.dart';
 import 'package:canonical_url/canonical_url.dart';
 
-
 AngelConfigurer configureServer(Services services) {
   var submitValidator = new Validator({
     requireField(PostFields.title): isNonEmptyString,
