@@ -6,13 +6,10 @@ import 'package:hn/src/models/models.dart';
 import 'package:hn/src/services.dart';
 import 'package:canonical_url/canonical_url.dart';
 
-String require(String s) => '$s*';
-
-String requireAll(Iterable<String> s) => s.map(require).join(',');
 
 AngelConfigurer configureServer(Services services) {
   var submitValidator = new Validator({
-    require(PostFields.title): isNonEmptyString,
+    requireField(PostFields.title): isNonEmptyString,
     PostFields.link: isString,
     PostFields.text: isString,
   });

@@ -15,7 +15,7 @@ nav ul {
     float: left;
     list-style-type: none;
     margin: 0;
-    padding: 0.5em 1em;
+    padding: 3px 1em;
 }
 
 nav ul.right {

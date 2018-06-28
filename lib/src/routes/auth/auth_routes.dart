@@ -17,7 +17,7 @@ void Function(Router) authRoutes(AngelAuth<User> auth, String pepper) {
 
   var logoutHandler = waterfall([
     auth.logout,
-        (ResponseContext res) => res.redirect('/'),
+    (ResponseContext res) => res.redirect('/'),
   ]);
 
   // We also want to sign users up, at /auth/create_account.
@@ -26,8 +26,10 @@ void Function(Router) authRoutes(AngelAuth<User> auth, String pepper) {
   // * username and password are both present
   // * username and password are both strings, and not the empty string.
   // * goto is optional, but it must be a string.
-  var createAccountValidator = new Validator(
-      {'username*,password*': isNonEmptyString, 'goto': isString});
+  var createAccountValidator = new Validator({
+    requireFields(['username', 'password']): isNonEmptyString,
+    'goto': isString
+  });
 
   var createAccountHandler = waterfall([
     validate(createAccountValidator),
