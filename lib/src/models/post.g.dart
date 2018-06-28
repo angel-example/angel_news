@@ -15,6 +15,7 @@ class Post extends _Post {
       this.link,
       this.text,
       this.karma,
+      this.user,
       this.createdAt,
       this.updatedAt});
 
@@ -40,6 +41,9 @@ class Post extends _Post {
   final int karma;
 
   @override
+  final User user;
+
+  @override
   final DateTime createdAt;
 
   @override
@@ -53,6 +57,7 @@ class Post extends _Post {
       String link,
       String text,
       int karma,
+      User user,
       DateTime createdAt,
       DateTime updatedAt}) {
     return new Post(
@@ -63,6 +68,7 @@ class Post extends _Post {
         link: link ?? this.link,
         text: text ?? this.text,
         karma: karma ?? this.karma,
+        user: user ?? this.user,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt);
   }
@@ -76,6 +82,7 @@ class Post extends _Post {
         other.link == link &&
         other.text == text &&
         other.karma == karma &&
+        other.user == user &&
         other.createdAt == createdAt &&
         other.updatedAt == updatedAt;
   }

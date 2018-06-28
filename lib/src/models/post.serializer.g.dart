@@ -18,6 +18,7 @@ abstract class PostSerializer {
         link: map['link'] as String,
         text: map['text'] as String,
         karma: map['karma'] as int,
+        user: map['user'] != null ? UserSerializer.fromMap(map['user']) : null,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
                 ? (map['created_at'] as DateTime)
@@ -31,6 +32,9 @@ abstract class PostSerializer {
   }
 
   static Map<String, dynamic> toMap(Post model) {
+    if (model == null) {
+      return null;
+    }
     return {
       'id': model.id,
       'user_id': model.userId,
@@ -39,6 +43,7 @@ abstract class PostSerializer {
       'link': model.link,
       'text': model.text,
       'karma': model.karma,
+      'user': UserSerializer.toMap(model.user),
       'created_at': model.createdAt?.toIso8601String(),
       'updated_at': model.updatedAt?.toIso8601String()
     };
@@ -59,6 +64,8 @@ abstract class PostFields {
   static const String text = 'text';
 
   static const String karma = 'karma';
+
+  static const String user = 'user';
 
   static const String createdAt = 'created_at';
 

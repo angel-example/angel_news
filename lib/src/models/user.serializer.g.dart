@@ -27,6 +27,9 @@ abstract class UserSerializer {
   }
 
   static Map<String, dynamic> toMap(User model) {
+    if (model == null) {
+      return null;
+    }
     return {
       'id': model.id,
       'username': model.username,

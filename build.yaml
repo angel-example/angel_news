@@ -1,0 +1,11 @@
+targets:
+  _standalone:
+    sources:
+      - lib/src/models/user.dart
+      - lib/src/models/vote.dart
+  $default:
+    dependencies:
+      - ":_standalone"
+    sources:
+      - lib/src/models/comment.dart
+      - lib/src/models/post.dart

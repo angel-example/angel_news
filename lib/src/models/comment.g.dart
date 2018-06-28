@@ -14,6 +14,7 @@ class Comment extends _Comment {
       this.parentId,
       this.text,
       this.karma,
+      this.user,
       this.createdAt,
       this.updatedAt});
 
@@ -36,6 +37,9 @@ class Comment extends _Comment {
   final int karma;
 
   @override
+  final User user;
+
+  @override
   final DateTime createdAt;
 
   @override
@@ -48,6 +52,7 @@ class Comment extends _Comment {
       String parentId,
       String text,
       int karma,
+      User user,
       DateTime createdAt,
       DateTime updatedAt}) {
     return new Comment(
@@ -57,6 +62,7 @@ class Comment extends _Comment {
         parentId: parentId ?? this.parentId,
         text: text ?? this.text,
         karma: karma ?? this.karma,
+        user: user ?? this.user,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt);
   }
@@ -69,6 +75,7 @@ class Comment extends _Comment {
         other.parentId == parentId &&
         other.text == text &&
         other.karma == karma &&
+        other.user == user &&
         other.createdAt == createdAt &&
         other.updatedAt == updatedAt;
   }

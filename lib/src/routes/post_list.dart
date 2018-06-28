@@ -7,10 +7,24 @@ import 'package:hn/src/services.dart';
 
 AngelConfigurer configureServer(Services services) {
   return (Angel app) async {
+    app.get('/post/:id', (String id, ResponseContext res) async {
+      var post = await services.postService
+          .read(id)
+          .then((map) => PostSerializer.fromMap(map));
+      var user = await services.userService
+          .read(post.userId)
+          .then((map) => UserSerializer.fromMap(map));
+
+      await res.render('post', {
+        'title': post.title,
+        'post': post.copyWith(user: user),
+      });
+    });
+
     app.get(
         '/',
         showPostList(
-          'Top',
+          null,
           (req) => {},
           filter: filterTopPosts,
         ));
@@ -75,6 +89,16 @@ Future<Paginator<Post>> fetchPosts(
 
   Iterable<Post> posts =
       await index.then((it) => it.map(PostSerializer.fromMap));
+
+  // Fetch the user
+  var users = <String, User>{};
+
+  posts = await Future.wait<Post>(posts.map((post) async {
+    var user = users[post.userId] ??= await services.userService
+        .read(post.userId)
+        .then((map) => UserSerializer.fromMap(map));
+    return post.copyWith(user: user);
+  }));
 
   if (filter != null) {
     posts = filter(posts.toList());

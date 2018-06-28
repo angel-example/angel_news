@@ -29,6 +29,9 @@ abstract class VoteSerializer {
   }
 
   static Map<String, dynamic> toMap(Vote model) {
+    if (model == null) {
+      return null;
+    }
     return {
       'id': model.id,
       'user_id': model.userId,

@@ -1,5 +1,6 @@
 import 'package:angel_model/angel_model.dart';
 import 'package:angel_serialize/angel_serialize.dart';
+import 'user.dart';
 
 part 'comment.g.dart';
 
@@ -16,4 +17,6 @@ abstract class _Comment extends Model {
   String get text;
 
   int get karma;
+
+  User get user;
 }

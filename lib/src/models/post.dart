@@ -1,6 +1,8 @@
 import 'package:angel_model/angel_model.dart';
 import 'package:angel_serialize/angel_serialize.dart';
+import 'package:collection/collection.dart';
 import 'package:timeago/timeago.dart';
+import 'user.dart';
 
 part 'post.g.dart';
 
@@ -21,6 +23,8 @@ abstract class _Post extends Model {
   String get text;
 
   int get karma;
+
+  User get user;
 
   String get linkTo => isLink ? link : '/post/$id';
 

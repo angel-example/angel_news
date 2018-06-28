@@ -9,9 +9,8 @@ LocalAuthVerifier localAuthVerifier(Services services, String pepper) {
     if (user == null) return null;
 
     // Don't sign a user in, if they have the wrong password, of course.
-    var hash = hashUserPassword(password, user.salt, pepper);
-    print('Hash $hash vs ${user.password} from ${user.username}');
-    if (user.password != hash) return null;
+    if (user.password != hashUserPassword(password, user.salt, pepper))
+      return null;
 
     return user;
   };

@@ -15,6 +15,7 @@ abstract class CommentSerializer {
         parentId: map['parent_id'] as String,
         text: map['text'] as String,
         karma: map['karma'] as int,
+        user: map['user'] != null ? UserSerializer.fromMap(map['user']) : null,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
                 ? (map['created_at'] as DateTime)
@@ -28,6 +29,9 @@ abstract class CommentSerializer {
   }
 
   static Map<String, dynamic> toMap(Comment model) {
+    if (model == null) {
+      return null;
+    }
     return {
       'id': model.id,
       'user_id': model.userId,
@@ -35,6 +39,7 @@ abstract class CommentSerializer {
       'parent_id': model.parentId,
       'text': model.text,
       'karma': model.karma,
+      'user': UserSerializer.toMap(model.user),
       'created_at': model.createdAt?.toIso8601String(),
       'updated_at': model.updatedAt?.toIso8601String()
     };
@@ -53,6 +58,8 @@ abstract class CommentFields {
   static const String text = 'text';
 
   static const String karma = 'karma';
+
+  static const String user = 'user';
 
   static const String createdAt = 'created_at';
 
