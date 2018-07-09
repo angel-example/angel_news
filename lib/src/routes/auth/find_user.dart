@@ -8,8 +8,9 @@ Future<User> findUser(String username, Services services) async {
 
   // * Query the database
   // * Use the deserializer to create typed Dart objects
-  Iterable<User> users = await services.userService
-      .index({'query': query}).then((it) => it.map(UserSerializer.fromMap));
+  var users = await services.userService
+          .index({'query': query}).then((it) => it.map(UserSerializer.fromMap))
+      as Iterable<User>;
 
   return users.isEmpty ? null : users.first;
 }

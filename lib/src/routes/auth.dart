@@ -27,7 +27,7 @@ AngelConfigurer configureServer(Services services) {
     auth.deserializer = (id) {
       return services.userService
           .read(id)
-          .then((map) => UserSerializer.fromMap(map));
+          .then((map) => UserSerializer.fromMap(map as Map));
     };
 
     // Inject the current user + path into `res.render`, since the user is parsed here.

@@ -3,7 +3,7 @@
 part of 'user.dart';
 
 // **************************************************************************
-// Generator: JsonModelGenerator
+// JsonModelGenerator
 // **************************************************************************
 
 class User extends _User {

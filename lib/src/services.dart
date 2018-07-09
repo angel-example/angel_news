@@ -37,6 +37,6 @@ class Services {
       service.beforeModify(hooks.addUpdatedAt(key: 'updated_at'));
 
       return service;
-    });
+    }) as HookedService;
   }
 }

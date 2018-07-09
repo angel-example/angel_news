@@ -3,7 +3,7 @@
 part of 'user.dart';
 
 // **************************************************************************
-// Generator: SerializerGenerator
+// SerializerGenerator
 // **************************************************************************
 
 abstract class UserSerializer {

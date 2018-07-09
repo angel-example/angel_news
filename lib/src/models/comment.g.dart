@@ -3,7 +3,7 @@
 part of 'comment.dart';
 
 // **************************************************************************
-// Generator: JsonModelGenerator
+// JsonModelGenerator
 // **************************************************************************
 
 class Comment extends _Comment {

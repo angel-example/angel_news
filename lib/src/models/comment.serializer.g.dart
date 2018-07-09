@@ -3,7 +3,7 @@
 part of 'comment.dart';
 
 // **************************************************************************
-// Generator: SerializerGenerator
+// SerializerGenerator
 // **************************************************************************
 
 abstract class CommentSerializer {
@@ -15,7 +15,9 @@ abstract class CommentSerializer {
         parentId: map['parent_id'] as String,
         text: map['text'] as String,
         karma: map['karma'] as int,
-        user: map['user'] != null ? UserSerializer.fromMap(map['user']) : null,
+        user: map['user'] != null
+            ? UserSerializer.fromMap(map['user'] as Map)
+            : null,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
                 ? (map['created_at'] as DateTime)

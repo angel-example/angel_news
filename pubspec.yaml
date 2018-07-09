@@ -19,5 +19,5 @@ dependencies:
 dev_dependencies: 
   angel_hot: ^1.0.0
   angel_serialize_generator: ^2.0.0
-  build_runner: ^0.8.0
-  console: ^2.2.4
+  build_runner: ^0.9.0
+  console: ^3.0.0

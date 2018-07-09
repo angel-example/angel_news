@@ -3,7 +3,7 @@
 part of 'post.dart';
 
 // **************************************************************************
-// Generator: JsonModelGenerator
+// JsonModelGenerator
 // **************************************************************************
 
 class Post extends _Post {

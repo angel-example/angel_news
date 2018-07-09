@@ -83,7 +83,7 @@ Future submit(RequestContext req, ResponseContext res, Services services,
     // Insert the post into the database, and deserialize it.
     post = await services.postService
         .create(post.toJson())
-        .then((map) => PostSerializer.fromMap(map));
+        .then((map) => PostSerializer.fromMap(map as Map));
   }
 
   // Take the user to view the post...

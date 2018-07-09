@@ -3,7 +3,7 @@
 part of 'vote.dart';
 
 // **************************************************************************
-// Generator: SerializerGenerator
+// SerializerGenerator
 // **************************************************************************
 
 abstract class VoteSerializer {
@@ -12,8 +12,8 @@ abstract class VoteSerializer {
         id: map['id'] as String,
         userId: map['user_id'] as String,
         type: map['type'] is VoteType
-            ? map['type']
-            : (map['type'] is int ? VoteType.values[map['type']] : null),
+            ? (map['type'] as VoteType)
+            : (map['type'] is int ? VoteType.values[map['type'] as int] : null),
         postId: map['post_id'] as String,
         commentId: map['comment_id'] as String,
         createdAt: map['created_at'] != null

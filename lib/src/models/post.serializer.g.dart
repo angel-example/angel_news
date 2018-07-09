@@ -3,7 +3,7 @@
 part of 'post.dart';
 
 // **************************************************************************
-// Generator: SerializerGenerator
+// SerializerGenerator
 // **************************************************************************
 
 abstract class PostSerializer {
@@ -12,13 +12,15 @@ abstract class PostSerializer {
         id: map['id'] as String,
         userId: map['user_id'] as String,
         type: map['type'] is PostType
-            ? map['type']
-            : (map['type'] is int ? PostType.values[map['type']] : null),
+            ? (map['type'] as PostType)
+            : (map['type'] is int ? PostType.values[map['type'] as int] : null),
         title: map['title'] as String,
         link: map['link'] as String,
         text: map['text'] as String,
         karma: map['karma'] as int,
-        user: map['user'] != null ? UserSerializer.fromMap(map['user']) : null,
+        user: map['user'] != null
+            ? UserSerializer.fromMap(map['user'] as Map)
+            : null,
         createdAt: map['created_at'] != null
             ? (map['created_at'] is DateTime
                 ? (map['created_at'] as DateTime)

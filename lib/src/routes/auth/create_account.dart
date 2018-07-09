@@ -24,7 +24,7 @@ Function createAccount(AngelAuth<User> auth, String pepper) {
       }
     } else {
       // Otherwise, create a new user.
-      var salt = uuid.v4();
+      var salt = uuid.v4() as String;
       user = new User(
           username: username,
           salt: salt,
@@ -38,7 +38,7 @@ Function createAccount(AngelAuth<User> auth, String pepper) {
       // as it contains timestamps, the ID, etc.
       user = await services.userService
           .create(user.toJson())
-          .then((map) => UserSerializer.fromMap(map));
+          .then((map) => UserSerializer.fromMap(map as Map));
     }
 
     // Now that we've found or created a user, let's give the user a response.

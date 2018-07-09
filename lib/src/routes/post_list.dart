@@ -11,10 +11,10 @@ AngelConfigurer configureServer(Services services) {
     app.get('/post/:id', (String id, ResponseContext res) async {
       var post = await services.postService
           .read(id)
-          .then((map) => PostSerializer.fromMap(map));
+          .then((map) => PostSerializer.fromMap(map as Map));
       var user = await services.userService
           .read(post.userId)
-          .then((map) => UserSerializer.fromMap(map));
+          .then((map) => UserSerializer.fromMap(map as Map));
 
       await res.render('post', {
         'title': post.title,
@@ -88,8 +88,8 @@ Future<Paginator<Post>> fetchPosts(
     index = services.postService.index({'query': query});
   }
 
-  Iterable<Post> posts =
-      await index.then((it) => it.map(PostSerializer.fromMap));
+  var posts = await index.then((it) => it.map(PostSerializer.fromMap))
+      as Iterable<Post>;
 
   // Fetch the user
   var users = new PooledMap<String, User>();
@@ -98,7 +98,7 @@ Future<Paginator<Post>> fetchPosts(
     var user = await users.putIfAbsent(post.userId, () {
       return services.userService
           .read(post.userId)
-          .then((map) => UserSerializer.fromMap(map));
+          .then((map) => UserSerializer.fromMap(map as Map));
     });
     return post.copyWith(user: user);
   }));

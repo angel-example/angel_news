@@ -3,7 +3,7 @@
 part of 'vote.dart';
 
 // **************************************************************************
-// Generator: JsonModelGenerator
+// JsonModelGenerator
 // **************************************************************************
 
 class Vote extends _Vote {
